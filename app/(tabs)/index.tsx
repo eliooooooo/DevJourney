@@ -4,6 +4,7 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { LevelContainer } from '@/components/LevelContainer';
+import Code from '@/components/Code';
 
 export default function HomeScreen() {
   return (
@@ -21,6 +22,10 @@ export default function HomeScreen() {
         <Text>16 days streak !</Text>
       </ThemedView>
       <LevelContainer />
+      <Code code="<ScrollView style={styles.container}>
+                    <Text style={styles.codeText}>{code}</Text>
+                  </ScrollView>" >
+      </Code>
     </ParallaxScrollView>
   );
 }
