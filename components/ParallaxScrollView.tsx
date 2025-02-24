@@ -1,5 +1,5 @@
 import type { PropsWithChildren, ReactElement } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Image, View, Text } from 'react-native';
 import Animated, {
   interpolate,
   useAnimatedRef,
@@ -11,17 +11,13 @@ import { ThemedView } from '@/components/ThemedView';
 import { useBottomTabOverflow } from '@/components/ui/TabBarBackground';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
-const HEADER_HEIGHT = 250;
+const HEADER_HEIGHT = 100;
 
 type Props = PropsWithChildren<{
-  headerImage: ReactElement;
-  headerBackgroundColor: { dark: string; light: string };
 }>;
 
 export default function ParallaxScrollView({
   children,
-  headerImage,
-  headerBackgroundColor,
 }: Props) {
   const colorScheme = useColorScheme() ?? 'light';
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -52,12 +48,24 @@ export default function ParallaxScrollView({
         scrollIndicatorInsets={{ bottom }}
         contentContainerStyle={{ paddingBottom: bottom }}>
         <Animated.View
-          style={[
-            styles.header,
-            { backgroundColor: headerBackgroundColor[colorScheme] },
-            headerAnimatedStyle,
-          ]}>
-          {headerImage}
+          style={[styles.header, headerAnimatedStyle]}
+          pointerEvents="none">
+          <ThemedView
+            style={{
+              backgroundColor: colorScheme === 'dark' ? 'white' : 'black',
+              justifyContent: 'start',
+              padding: 16,
+              alignItems: 'center',
+              flexDirection: 'row',
+              gap: 16,
+              height: HEADER_HEIGHT,
+            }}>
+              <Image source={{ uri: 'https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png' }} style={{ width: 60, height: 60 }} />
+              <View>
+                <Text style={{ fontSize: 24, color: colorScheme === 'dark' ? 'black' : 'white' }}>Username</Text>
+                <Text style={{ fontSize: 16, color: colorScheme === 'dark' ? 'black' : 'white' }}>points</Text>
+              </View>
+          </ThemedView>
         </Animated.View>
         <ThemedView style={styles.content}>{children}</ThemedView>
       </Animated.ScrollView>
