@@ -6,11 +6,13 @@ import { useColorScheme } from "react-native";
 type Props = {
   check: boolean;
   number: number;
+  current: boolean;
 };
 
 export function Level({
   check,
-  number
+  number,
+  current
 }: Props) {
   const colorScheme = useColorScheme() ?? 'light';
 
@@ -22,18 +24,22 @@ export function Level({
       padding: 16,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: colorScheme === 'dark' ? '#FFF' : '#000',
+      backgroundColor: current ? (colorScheme === 'dark' ? '#FFD700' : '#FFA500') : (colorScheme === 'dark' ? '#FFF' : '#000'),
       opacity: check ? 1 : 0.5,
-      borderRadius: 60
+      borderRadius: 60,
+      marginLeft: Math.floor(Math.random() * 121) - 60,
+      transform: [{ scale: current ? 1.2 : 1 }],
       }}
     >
       <ThemedText
       style={{
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: colorScheme === 'dark' ? '#000' : '#FFF'
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: colorScheme === 'dark' ? '#000' : '#FFF'
       }}
-      >{number}</ThemedText>
+      >
+      {number}
+      </ThemedText>
     </ThemedView>
   );
 }

@@ -2,10 +2,12 @@ import { useThemeColor } from "@/hooks/useThemeColor";
 import { ThemedView } from "./ThemedView";
 import { Level } from "./Level";
 import { useEffect, useState } from "react";
-import { ThemedText } from "./ThemedText";
-import { Text } from "react-native";
+import { ScrollView, Text } from "react-native";
+import { useSession } from "@/context/ctx";
 
 export function LevelContainer() {
+    const { session, isLoading } = useSession();
+    const currentLevel = session.level;
 
     const [levels, setLevels] = useState([]);
 
@@ -24,27 +26,26 @@ export function LevelContainer() {
     }, []);
     
     let levelsRender = [];
-    for (let i = 0; i < levels.length; i++) {
+    for (let i = levels.length - 1; i >= 0; i--) {
         levelsRender.push(
             <ThemedView key={i} style={{
                 flexDirection: 'row',
-                justifyContent: 'space-around',
-                padding: 16
+                justifyContent: 'center',
+                padding: 12
                 }}>
                 <Level
-                    check={levels[i].check}
+                    check={i < currentLevel - 1}
+                    current={i === currentLevel - 1}
                     number={levels[i].number}
                 ></Level>
-                <Text>{levels[i].check}</Text>
             </ThemedView>
         );
     }
 
 
   return (
-    <ThemedView
-    >
+    <ScrollView style={{ width: "100%" }} >
         {levelsRender}
-    </ThemedView>
+    </ScrollView>
   );
 }
