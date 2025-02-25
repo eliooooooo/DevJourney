@@ -28,15 +28,18 @@ export function LevelContainer() {
     let levelsRender = [];
     for (let i = levels.length - 1; i >= 0; i--) {
         levelsRender.push(
-            <ThemedView key={i} style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                padding: 12
+            <ThemedView key={levels[i].number} 
+                style={{
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    padding: 12
                 }}>
                 <Level
                     check={i < currentLevel - 1}
                     current={i === currentLevel - 1}
                     number={levels[i].number}
+                    key={levels[i].number}
+                    id={levels[i]._id}
                 ></Level>
             </ThemedView>
         );
