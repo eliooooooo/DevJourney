@@ -1,17 +1,17 @@
-import { Text, View } from 'react-native';
-
 import { useSession } from '../../context/ctx';
+import { ThemedView } from '@/components/ThemedView';
+import { ThemedText } from '@/components/ThemedText';
 
 export default function Index() {
   const { signOut } = useSession();
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text
+    <ThemedView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'red', height: '100%' }}>
+      <ThemedText
         onPress={() => {
           signOut();
         }}>
         Sign Out
-      </Text>
-    </View>
+      </ThemedText>
+    </ThemedView>
   );
 }

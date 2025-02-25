@@ -1,7 +1,7 @@
-import { Text } from 'react-native';
-import { Redirect, Stack } from 'expo-router';
+import { Redirect } from 'expo-router';
 
 import { useSession } from '../../context/ctx';
+import { CustomStack } from '@/components/ThemedStack';
 
 export default function AppLayout() {
   const { session, isLoading } = useSession();
@@ -15,5 +15,5 @@ export default function AppLayout() {
   }
 
   // This layout can be deferred because it's not the root layout.
-  return <Stack />;
+  return <CustomStack />;
 }
