@@ -1,14 +1,17 @@
 import { useContext, createContext, type PropsWithChildren } from 'react';
 import { useStorageState } from '../hooks/useStorageState';
+import { router, useRouter } from 'expo-router';
 
 const AuthContext = createContext<{
   signIn: (user: object) => void;
   signOut: () => void;
+  register: (user: object) => void;
   session?: object | null;
   isLoading: boolean;
 }>({
   signIn: () => null,
   signOut: () => null,
+  register: () => null,
   session: null,
   isLoading: false,
 });
@@ -27,6 +30,7 @@ export function useSession() {
 
 export function SessionProvider({ children }: PropsWithChildren) {
   const [[isLoading, session], setSession] = useStorageState('session');
+  const router = useRouter();
 
   return (
     <AuthContext.Provider
@@ -45,14 +49,36 @@ export function SessionProvider({ children }: PropsWithChildren) {
                 (res) => {
                     setSession(res);
                     console.log('session:', res);
+                    router.replace('/(app)');
                 },
                 (error) => {
                     console.error("Error in login:", error);
                 }
             );
         },
+        register: (user: object) => {
+            console.log("User registering:", user);
+            fetch("https://devjourney.elioooooo.fr/register", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(user),
+            })
+            .then(res => res.json())
+            .then(
+                (res) => {
+                    setSession(res);
+                    console.log('session:', res);
+                    router.replace('/(app)');
+                },
+                (error) => {
+                    console.error("Error in register:", error);
+                }
+            );
+        },
         signOut: () => {
-          setSession(null);
+            setSession(null);
         },
         session,
         isLoading,

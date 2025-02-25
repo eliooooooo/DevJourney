@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, TextInput } from 'react-native';
-import { useRouter } from 'expo-router';
+import { Button, TextInput, Image } from 'react-native';
+import { Link, useRouter } from 'expo-router';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useSession } from '@/context/ctx';
@@ -13,29 +13,34 @@ export default function SignIn() {
   const [password, setPassword] = useState('');
 
   return (
-    <ThemedView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <ThemedText>Sign In</ThemedText>
+    <ThemedView style={{ flex: 1, flexDirection: 'column', gap: 20, justifyContent: 'center', alignItems: 'stretch', padding: 20 }}>
+      <ThemedView>
+        <Image source={require('../assets/images/icon.png')} style={{ width: 100, height: 100, alignSelf: 'center' }} />
+        <ThemedText style={{ textAlign: 'center', fontSize: 22, fontWeight: 'bold' }}>Welcome back ! Log In</ThemedText>
+      </ThemedView>
       <TextInput
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
-        style={{ marginVertical: 10, padding: 10, borderColor: 'gray', borderWidth: 1 }}
+        style={{ padding: 10, borderColor: 'gray', borderWidth: 1 }}
       />
       <TextInput
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
-        style={{ marginVertical: 10, padding: 10, borderColor: 'gray', borderWidth: 1 }}
+        style={{ padding: 10, borderColor: 'gray', borderWidth: 1 }}
       />
       <Button
         onPress={() => {
           const user = { email, password };
           signIn(user);
-          router.replace('/(app)');
         }}
-        title="Sign In"
+        title="Log In"
       />
+      <Link href="/register">
+        <ThemedText style={{ textAlign: 'center' }}>No account ? <ThemedText style={{ textDecorationLine: 'underline', color: 'blue' }}>Register</ThemedText></ThemedText>
+      </Link>
     </ThemedView>
   );
 }
