@@ -35,7 +35,7 @@ export function Level({ current, number, colorScheme, check, id }) {
       </ThemedText>
     </ThemedView>
   ];
-  console.log(id);
+
   return current ? (
     <Link key={number} href={`/(app)/level/${id}`}>
       {content}

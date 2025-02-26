@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { ThemedText } from '@/components/ThemedText';
+import { ThemedView } from '@/components/ThemedView';
 
-const LevelPage = () => {
+export default function LevelPage() {
   // Utilisez useLocalSearchParams pour récupérer les paramètres de l'URL
   const { id } = useLocalSearchParams();
 
@@ -15,7 +16,7 @@ const LevelPage = () => {
           .then(
               (result) => {
                   setLevel(result);
-                  console.log("Level fetched:", result);
+                  console.log("Level fetched");
               },
               (error) => {
                   console.error("Error fetching level:", error);
@@ -23,13 +24,13 @@ const LevelPage = () => {
           );
   }, []);
 
-  handleSubmit = (submit) => {
+  const handleSubmit = (submit) => {
     if (submit == level.answer) {
       console.log("Correct answer");
     } else {
       console.log("Wrong answer");
       // implémenter ici la logique de feedback par l'API OpenAI
-  }
+  }};
 
   return (
     <ScrollView>
@@ -37,8 +38,11 @@ const LevelPage = () => {
       <ThemedText>Question : {level.question}</ThemedText>
       <ThemedText>Difficulty : {level.difficulty}</ThemedText>
       <ThemedText>Type : {level.type}</ThemedText>
+      <ScrollView>
+        <ThemedView>
+
+        </ThemedView>
+      </ScrollView>
     </ScrollView>
   );
 };
-
-export default LevelPage;

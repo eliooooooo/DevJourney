@@ -17,7 +17,7 @@ export function LevelContainer() {
             .then(
                 (result) => {
                     setLevels(result);
-                    console.log("Levels fetched:", result);
+                    console.log("Levels fetched");
                 },
                 (error) => {
                     console.error("Error fetching items:", error);

@@ -36,7 +36,6 @@ export function SessionProvider({ children }: PropsWithChildren) {
     <AuthContext.Provider
       value={{
         signIn: (user: object) => {
-            console.log("User logging in:", user);
             fetch("https://devjourney.elioooooo.fr/login", {
                 method: 'POST',
                 headers: {
@@ -48,7 +47,6 @@ export function SessionProvider({ children }: PropsWithChildren) {
             .then(
                 (res) => {
                     setSession(res);
-                    console.log('session:', res);
                     router.replace('/(app)');
                 },
                 (error) => {
@@ -57,7 +55,6 @@ export function SessionProvider({ children }: PropsWithChildren) {
             );
         },
         register: (user: object) => {
-            console.log("User registering:", user);
             fetch("https://devjourney.elioooooo.fr/register", {
                 method: 'POST',
                 headers: {
@@ -69,7 +66,6 @@ export function SessionProvider({ children }: PropsWithChildren) {
             .then(
                 (res) => {
                     setSession(res);
-                    console.log('session:', res);
                     router.replace('/(app)');
                 },
                 (error) => {
