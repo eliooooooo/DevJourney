@@ -34,15 +34,17 @@ export default function LevelPage() {
 
   return (
     <ScrollView>
-      <ThemedText>Level: {level.number}</ThemedText>
-      <ThemedText>Question : {level.question}</ThemedText>
-      <ThemedText>Difficulty : {level.difficulty}</ThemedText>
-      <ThemedText>Type : {level.type}</ThemedText>
-      <ScrollView>
-        <ThemedView>
-
+      <ThemedView style={{ padding: 16 }} >
+        <ThemedView style={{ alignSelf: 'flex-start', marginBottom: 8 }} >
+          <ThemedText style={{ fontSize: 16, backgroundColor: '#939292', width: 'fit-content', paddingHorizontal: 12, paddingVertical: 4, borderRadius: 30, color: 'white' }}>
+            {level.type}
+          </ThemedText> 
         </ThemedView>
-      </ScrollView>
+        <ThemedText style={{ fontSize: 20, fontWeight: 'bold' }} >{level.question}</ThemedText>
+      </ThemedView>
+      <ThemedView style={{ padding: 16 }} >
+        
+      </ThemedView>
     </ScrollView>
   );
 };

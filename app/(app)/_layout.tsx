@@ -70,7 +70,7 @@ const LevelHeader = ({ level }) => (
       </ThemedView>
       <ThemedView style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
         <ThemedText style={{ fontSize: 18, fontWeight: 'bold' }}>
-          Level {level.number}
+          Level {level.number} ({level.category})
         </ThemedText>
         <ThemedText style={{ fontSize: 16 }}>
           {level.difficulty}
