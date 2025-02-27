@@ -72,9 +72,19 @@ const LevelHeader = ({ level }) => (
         <ThemedText style={{ fontSize: 18, fontWeight: 'bold' }}>
           Level {level.number} ({level.category})
         </ThemedText>
-        <ThemedText style={{ fontSize: 16 }}>
-          {level.difficulty}
-        </ThemedText>
+        <ThemedView style={{ fontSize: 16, display: 'flex', flexDirection: 'row', gap: 5, alignItems: 'center' }}>
+          <ThemedView style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', backgroundColor: '#FFD700', padding: 5, borderRadius: 5 }}>
+            {Array.from({ length: level.difficulty === 'easy' ? 1 : level.difficulty === 'medium' ? 2 : level.difficulty === 'hard' ? 3 : 0 }).map((_, index) => (
+            <IconSymbol key={index} name="star" color="black" size={16} />
+            ))}
+            {Array.from({ length: level.difficulty === 'easy' ? 2 : level.difficulty === 'medium' ? 1 : level.difficulty === 'hard' ? 0 : 0 }).map((_, index) => (
+            <IconSymbol key={index} name="star.border" color="black" size={16} />
+            ))}
+          </ThemedView>
+          <ThemedText style={{ fontSize: 16 }}>
+            ({level.difficulty})
+          </ThemedText>
+        </ThemedView>
       </ThemedView>
     </ThemedView>
     <Link href="/">
