@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "DevJourney",
-    "slug": "DevJourney",
+    "slug": "devjourney",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -14,7 +14,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/icon-android.jpg",
         "backgroundColor": "#ffffff"
       },
       "package": "com.eliott_brkl.DevJourney"
@@ -38,6 +38,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "d43e2eb6-9115-4c20-acac-a6d51e033a1f"
+      }
+    },
+    "owner": "eliott_brkl"
   }
 }
