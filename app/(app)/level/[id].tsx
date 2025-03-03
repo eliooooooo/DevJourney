@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, ScrollView, Touchable, TouchableOpacity, useColorScheme, View } from 'react-native';
+import { Button, ScrollView, TextInput, Touchable, TouchableOpacity, useColorScheme, View } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -15,10 +15,12 @@ export default function LevelPage() {
   const [submited, setSubmited] = useState(false);
   const [feedback, setFeedback] = useState('');
   const [explanation, setExplanation] = useState('');
+  const [multiple, setMultiple] = useState([]);
 
   const { session, isLoading } = useSession();
   const { update } = useSession();
   const userId = session._id;
+  const inputText = colorScheme === 'dark' ? 'white' : 'black';
 
   useEffect(() => {
     console.log(value);
@@ -40,6 +42,18 @@ export default function LevelPage() {
               }
           );
   }, []);
+
+  useEffect(() => {
+    if(level.type === "multiple" && level.subQuestion) {
+      try {
+        const parsedSubQuestion = level.subQuestion.split(',');
+        console.log('parsedSubQuestion:', parsedSubQuestion);
+        setMultiple(parsedSubQuestion);
+      } catch (error) {
+        console.error("Error parsing subQuestion:", error);
+      }
+    }
+  }, [level]);
 
   const handleSubmit = async (submit) => {
     console.log('submit:', submit);
@@ -64,9 +78,9 @@ export default function LevelPage() {
             "model": "gpt-4o-mini",
             "messages": [{
                 "role": "assistant",
-                "content": `Explain why the answer "${submit}" is incorrect for the question "${level.question}". The correct answer is "${level.answer}".`
+                "content": `Explain in 2 phrases, why the answer "${submit}" is incorrect for the question "${level.question}". The correct answer is "${level.answer}".`
                 }],
-            "max_tokens": 150
+            "max_tokens": 100
           },
           {
             headers: {
@@ -98,20 +112,57 @@ export default function LevelPage() {
         </ThemedView>
         { level.title != null ? <ThemedText >{level.title}</ThemedText> : null }
         <ThemedText style={{ fontSize: 20, fontWeight: 'bold' }} >{level.question}</ThemedText>
-        { level.subQuestion != null ? <ThemedView style={{ paddingVertical: 24 }} ><ThemedText>{level.subQuestion}</ThemedText></ThemedView> : null }
+        { level.type === "multiple" ? null : <ThemedView style={{ paddingVertical: 24 }} ><ThemedText>{level.subQuestion}</ThemedText></ThemedView>}
       </ThemedView>
       <ThemedView >
-        <ThemedView style={{ paddingVertical: 32, display: 'flex', flexDirection: 'row', alignItems: 'stretch' }} >
-          <TouchableOpacity onPress={() => setValue("true")} style={{ backgroundColor: value === "true" ? '#5174F4' : colorScheme === "dark" ? '#EAEAEA' : "#F6F6F6", padding: 12, borderTopLeftRadius: 30, borderBottomLeftRadius: 30, flex: 1 }} >
-            <ThemedText style={{ color: value === "true" ? 'white' : 'black', fontSize: 16, textAlign: 'center' }} >True</ThemedText>
-          </TouchableOpacity>
-          <ThemedView style={{ width: 1, backgroundColor: colorScheme === "dark" ? '#1E1E1E' : "#EAEAEA" }} />
-          <TouchableOpacity onPress={() => setValue("false")} style={{ backgroundColor: value === "false" ? '#5174F4' : colorScheme === "dark" ? '#EAEAEA' : "#F6F6F6", padding: 12, borderTopRightRadius: 30, borderBottomRightRadius: 30, flex: 1 }} >
-            <ThemedText style={{ color: value === "false" ? 'white' : 'black', fontSize: 16, textAlign: 'center' }} >False</ThemedText>
-          </TouchableOpacity>
-        </ThemedView>
+        { level.type === "boolean" ? 
+          <ThemedView style={{ paddingVertical: 32, display: 'flex', flexDirection: 'row', alignItems: 'stretch' }} >
+            <TouchableOpacity onPress={() => setValue("true")} style={{ backgroundColor: value === "true" ? '#5174F4' : colorScheme === "dark" ? '#EAEAEA' : "#F6F6F6", padding: 12, borderTopLeftRadius: 30, borderBottomLeftRadius: 30, flex: 1 }} >
+              <ThemedText style={{ color: value === "true" ? 'white' : 'black', fontSize: 16, textAlign: 'center' }} >True</ThemedText>
+            </TouchableOpacity>
+            <ThemedView style={{ width: 1, backgroundColor: colorScheme === "dark" ? '#1E1E1E' : "#EAEAEA" }} />
+            <TouchableOpacity onPress={() => setValue("false")} style={{ backgroundColor: value === "false" ? '#5174F4' : colorScheme === "dark" ? '#EAEAEA' : "#F6F6F6", padding: 12, borderTopRightRadius: 30, borderBottomRightRadius: 30, flex: 1 }} >
+              <ThemedText style={{ color: value === "false" ? 'white' : 'black', fontSize: 16, textAlign: 'center' }} >False</ThemedText>
+            </TouchableOpacity>
+          </ThemedView>
+          : null }
+        { level.type === "multiple" ?
+          <ThemedView style={{ paddingVertical: 32, display: 'flex', flexDirection: 'column', alignItems: 'stretch' }} >
+            <ThemedView style={{ display: 'flex', flexDirection: 'row', alignItems: 'stretch' }} >
+              <TouchableOpacity onPress={() => setValue(multiple[0])} style={{ backgroundColor: value === multiple[0] ? '#5174F4' : colorScheme === "dark" ? '#EAEAEA' : "#F6F6F6", padding: 12, borderTopLeftRadius: 30, flex: 1 }} >
+                <ThemedText style={{ color: value === multiple[0] ? 'white' : 'black', fontSize: 16, textAlign: 'center' }} >{multiple[0]}</ThemedText>
+              </TouchableOpacity>
+              <ThemedView style={{ width: 1, backgroundColor: colorScheme === "dark" ? '#1E1E1E' : "#EAEAEA" }} />
+              <TouchableOpacity onPress={() => setValue(multiple[1])} style={{ backgroundColor: value === multiple[1] ? '#5174F4' : colorScheme === "dark" ? '#EAEAEA' : "#F6F6F6", padding: 12, borderTopRightRadius: 30, flex: 1 }} >
+                <ThemedText style={{ color: value === multiple[1] ? 'white' : 'black', fontSize: 16, textAlign: 'center' }} >{multiple[1]}</ThemedText>
+              </TouchableOpacity>
+            </ThemedView> 
+            <ThemedView style={{ height: 1, backgroundColor: colorScheme === "dark" ? '#1E1E1E' : "#EAEAEA" }} />           
+            <ThemedView style={{ display: 'flex', flexDirection: 'row', alignItems: 'stretch' }} >
+              <TouchableOpacity onPress={() => setValue(multiple[2])} style={{ backgroundColor: value === multiple[2] ? '#5174F4' : colorScheme === "dark" ? '#EAEAEA' : "#F6F6F6", padding: 12, borderBottomLeftRadius: 30, flex: 1 }} >
+                <ThemedText style={{ color: value === multiple[2] ? 'white' : 'black', fontSize: 16, textAlign: 'center' }} >{multiple[2]}</ThemedText>
+              </TouchableOpacity>
+              <ThemedView style={{ width: 1, backgroundColor: colorScheme === "dark" ? '#1E1E1E' : "#EAEAEA" }} />
+              <TouchableOpacity onPress={() => setValue(multiple[3])} style={{ backgroundColor: value === multiple[3] ? '#5174F4' : colorScheme === "dark" ? '#EAEAEA' : "#F6F6F6", padding: 12, borderBottomRightRadius: 30, flex: 1 }} >
+                <ThemedText style={{ color: value === multiple[3] ? 'white' : 'black', fontSize: 16, textAlign: 'center' }} >{multiple[3]}</ThemedText>
+              </TouchableOpacity>
+            </ThemedView>
+          </ThemedView>
+        : null }
+        { level.type === 'input' ?
+          <ThemedView style={{ paddingVertical: 32, display: 'flex', flexDirection: 'row', alignItems: 'stretch' }} >
+            <TextInput
+              placeholder="Your answer"
+              placeholderTextColor={'gray'}
+              onChangeText={(text) => {
+                setValue(text.toLowerCase());
+                console.log(text.toLowerCase());}}
+              style={{ padding: 10, borderColor: 'gray', borderWidth: 1, color: inputText, width: '100%' }}
+            />
+          </ThemedView>
+        : null }
       </ThemedView>
-      <ThemedView style={{ display: value != null ? 'flex' : 'none', flexDirection: 'row', justifyContent: 'center' }} >
+      <ThemedView style={{ display: value != null ? 'flex' : 'none', flexDirection: 'column', justifyContent: 'center' }} >
         <TouchableOpacity onPress={() => handleSubmit(value)} style={{ backgroundColor: '#5174F4', padding: 12, borderRadius: 30, width: '100%', display: submited === false ? 'flex' : 'none' }} >
           <ThemedText style={{ color: 'white', fontSize: 16, textAlign: 'center' }} >Submit</ThemedText>
         </TouchableOpacity>
