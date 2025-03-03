@@ -69,12 +69,12 @@ export default function AppLayout() {
     </ThemedView>
   );
 
-  const AlternateHeader = () => (
+  const AlternateHeader = ({ session }) => (
     <ThemedView
       style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: 16, gap: 20 }}
     >
       <ThemedText style={{ fontSize: 18, fontWeight: 'bold' }}>
-        Alternate Header
+        {session.username}'s profile
       </ThemedText>
     </ThemedView>
   );
@@ -133,7 +133,7 @@ export default function AppLayout() {
           } else if (path.startsWith('/level/')) {
             return <LevelHeader level={level} />;
           } else {
-            return <AlternateHeader />;
+            return <AlternateHeader session={session} />;
           }
         },
       })}
