@@ -14,6 +14,7 @@ const RegisterScreen = () => {
 
   const colorScheme = useColorScheme() ?? 'light';
   const logo = colorScheme === 'dark' ? require('../assets/images/icon-light.png') : require('../assets/images/icon.png');
+  const inputText = colorScheme === 'dark' ? 'white' : 'black';
 
   return (
     <ThemedView style={{ flex: 1, flexDirection: 'column', gap: 20, justifyContent: 'center', alignItems: 'stretch', padding: 20 }}>
@@ -26,14 +27,14 @@ const RegisterScreen = () => {
         placeholderTextColor={'gray'}
         value={email}
         onChangeText={setEmail}
-        style={{ padding: 10, borderColor: 'gray', borderWidth: 1 }}
+        style={{ padding: 10, borderColor: 'gray', borderWidth: 1, color: inputText }}
       />
       <TextInput
         placeholder="Username"
         placeholderTextColor={'gray'}
         value={username}
         onChangeText={setUsername}
-        style={{ padding: 10, borderColor: 'gray', borderWidth: 1 }}
+        style={{ padding: 10, borderColor: 'gray', borderWidth: 1, color: inputText }}
       />
       <TextInput
         placeholder="Password"
@@ -41,7 +42,7 @@ const RegisterScreen = () => {
         value={password}
         onChangeText={setPassword}
         secureTextEntry
-        style={{ padding: 10, borderColor: 'gray', borderWidth: 1 }}
+        style={{ padding: 10, borderColor: 'gray', borderWidth: 1, color: inputText }}
       />
       <Button
         onPress={() => {

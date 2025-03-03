@@ -5,6 +5,7 @@ import { ThemedText } from '@/components/ThemedText';
 export function Level({ current, number, colorScheme, check, id }) {
   const content = [
     <ThemedView
+      key={id}
       style={{
         height: 60,
         width: 60,
@@ -13,11 +14,11 @@ export function Level({ current, number, colorScheme, check, id }) {
         alignItems: 'center',
         backgroundColor: current
           ? colorScheme === 'dark'
-            ? '#FFD700'
-            : '#FFA500'
+            ? '#5174F4'
+            : '#5174F4'
           : colorScheme === 'dark'
           ? '#FFF'
-          : '#000',
+          : '#05113E',
         opacity: check ? 1 : 0.5,
         borderRadius: 60,
         marginLeft: Math.floor(Math.random() * 121) - 60,

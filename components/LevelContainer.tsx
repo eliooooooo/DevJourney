@@ -35,7 +35,7 @@ export function LevelContainer() {
                     padding: 12
                 }}>
                 <Level
-                    check={i < currentLevel - 1}
+                    check={i <= currentLevel -1 }
                     current={i === currentLevel - 1}
                     number={levels[i].number}
                     id={levels[i]._id}

@@ -8,6 +8,7 @@ import { useSession } from '@/context/ctx';
 export default function SignIn() {
   const colorScheme = useColorScheme() ?? 'light';
   const logo = colorScheme === 'dark' ? require('../assets/images/icon-light.png') : require('../assets/images/icon.png');
+  const inputText = colorScheme === 'dark' ? 'white' : 'black';
 
   const { signIn } = useSession();
   const router = useRouter();
@@ -26,7 +27,7 @@ export default function SignIn() {
         placeholderTextColor={'gray'}
         value={email}
         onChangeText={setEmail}
-        style={{ padding: 10, borderColor: 'gray', borderWidth: 1 }}
+        style={{ padding: 10, borderColor: 'gray', borderWidth: 1, color: inputText }}
       />
       <TextInput
         placeholder="Password"
@@ -34,7 +35,7 @@ export default function SignIn() {
         value={password}
         onChangeText={setPassword}
         secureTextEntry
-        style={{ padding: 10, borderColor: 'gray', borderWidth: 1 }}
+        style={{ padding: 10, borderColor: 'gray', borderWidth: 1, color: inputText }}
       />
       <Button
         onPress={() => {
