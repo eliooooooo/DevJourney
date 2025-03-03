@@ -38,7 +38,6 @@ export function LevelContainer() {
                     check={i < currentLevel - 1}
                     current={i === currentLevel - 1}
                     number={levels[i].number}
-                    key={levels[i].number}
                     id={levels[i]._id}
                 ></Level>
             </ThemedView>

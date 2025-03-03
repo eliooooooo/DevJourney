@@ -3,6 +3,7 @@ import { Button, ScrollView, Touchable, TouchableOpacity, View } from 'react-nat
 import { useLocalSearchParams } from 'expo-router';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { useSession } from '../../../context/ctx';
 import axios from 'axios';
 
 export default function LevelPage() {
@@ -13,6 +14,10 @@ export default function LevelPage() {
   const [submited, setSubmited] = useState(false);
   const [feedback, setFeedback] = useState('');
   const [explanation, setExplanation] = useState('');
+
+  const { session, isLoading } = useSession();
+  const { update } = useSession();
+  const userId = session._id;
 
   useEffect(() => {
     console.log(value);
@@ -41,10 +46,15 @@ export default function LevelPage() {
 
     if (submit === level.answer) {
       setFeedback("Correct answer!");
-      console.log("Correct answer");
+      if(session.streak + 1 > session.bestStreak) {
+        update({ _id: userId, level: session.level + 1, streak: session.streak + 1, bestStreak: session.streak + 1 });
+      } else {
+        update({ _id: userId, level: session.level + 1, streak: session.streak + 1 });
+      }
     } else {
       setFeedback("Wrong answer...");
-      console.log("Wrong answer");
+      // Update the user's level and streak
+      update({ _id: userId, level: session.level + 1, streak: 0 });
 
       try {
         const response = await axios.post(

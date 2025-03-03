@@ -37,10 +37,10 @@ export function Level({ current, number, colorScheme, check, id }) {
   ];
 
   return current ? (
-    <Link key={number} href={`/(app)/level/${id}`}>
+    <Link href={`/(app)/level/${id}`}>
       {content}
     </Link>
   ) : (
-    <ThemedView key={number} >{content}</ThemedView>
+    <ThemedView >{content}</ThemedView>
   );
 };

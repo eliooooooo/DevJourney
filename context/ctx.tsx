@@ -6,12 +6,14 @@ const AuthContext = createContext<{
   signIn: (user: object) => void;
   signOut: () => void;
   register: (user: object) => void;
+  update: (user: object) => void;
   session?: object | null;
   isLoading: boolean;
 }>({
   signIn: () => null,
   signOut: () => null,
   register: () => null,
+  update: () => null,
   session: null,
   isLoading: false,
 });
@@ -75,6 +77,24 @@ export function SessionProvider({ children }: PropsWithChildren) {
         },
         signOut: () => {
             setSession(null);
+        },
+        update: (user: object) => {
+            fetch(`https://devjourney.elioooooo.fr/users/${user._id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(user),
+            })
+            .then(res => res.json())
+            .then(
+                (res) => {
+                    setSession(res);
+                },
+                (error) => {
+                    console.error("Error in update:", error);
+                }
+            );
         },
         session,
         isLoading,
