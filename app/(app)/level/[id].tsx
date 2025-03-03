@@ -23,13 +23,6 @@ export default function LevelPage() {
   const inputText = colorScheme === 'dark' ? 'white' : 'black';
 
   useEffect(() => {
-    console.log(value);
-    setValue('');
-    setSubmited(false);
-    setFeedback('');
-  }, []);
-
-  useEffect(() => {
       fetch(`https://devjourney.elioooooo.fr/levels/${id}`)
           .then(res => res.json())
           .then(
