@@ -76,6 +76,9 @@ export default function AppLayout() {
       <ThemedText style={{ fontSize: 18, fontWeight: 'bold' }}>
         {session.username}'s profile
       </ThemedText>
+      <Link href="/">
+          <IconSymbol name="close" color={ colorScheme === "light" ? "black" : "white"} size={25}></IconSymbol>
+        </Link>
     </ThemedView>
   );
 
@@ -125,18 +128,25 @@ export default function AppLayout() {
   };
 
   return (
-    <Stack
-      screenOptions={() => ({
-        header: () => {
-          if (path === '/') {
-            return <MainHeader session={session} />;
-          } else if (path.startsWith('/level/')) {
-            return <LevelHeader level={level} />;
-          } else {
-            return <AlternateHeader session={session} />;
-          }
-        },
-      })}
-    />
+    <Stack>
+      <Stack.Screen
+        name="index"
+        options={{
+          header: () => <MainHeader session={session} />,
+        }}
+      />
+      <Stack.Screen
+        name="profil"
+        options={{
+          header: () => <AlternateHeader session={session} />,
+        }}
+      />
+      <Stack.Screen
+        name="level/[id]"
+        options={{
+          header: () => <LevelHeader level={level} />,
+        }}
+      />
+    </Stack>
   );
 }

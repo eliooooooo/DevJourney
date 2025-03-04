@@ -40,7 +40,6 @@ export default function LevelPage() {
     if(level.type === "multiple" && level.subQuestion) {
       try {
         const parsedSubQuestion = level.subQuestion.split(',');
-        console.log('parsedSubQuestion:', parsedSubQuestion);
         setMultiple(parsedSubQuestion);
       } catch (error) {
         console.error("Error parsing subQuestion:", error);
@@ -49,8 +48,6 @@ export default function LevelPage() {
   }, [level]);
 
   const handleSubmit = async (submit) => {
-    console.log('submit:', submit);
-    console.log('answer:', level.answer);
 
     if (submit === level.answer) {
       setFeedback("Correct answer!");
@@ -148,8 +145,7 @@ export default function LevelPage() {
               placeholder="Your answer"
               placeholderTextColor={'gray'}
               onChangeText={(text) => {
-                setValue(text.toLowerCase());
-                console.log(text.toLowerCase());}}
+                setValue(text.toLowerCase());}}
               style={{ padding: 10, borderColor: 'gray', borderWidth: 1, color: inputText, width: '100%' }}
             />
           </ThemedView>

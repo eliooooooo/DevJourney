@@ -6,7 +6,6 @@ import { Image, Touchable, TouchableOpacity } from 'react-native';
 export default function Index() {
   const { signOut } = useSession();
   const { session, isLoading } = useSession();
-  console.log('session:', session);
 
   return (
     <ThemedView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
