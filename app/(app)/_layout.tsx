@@ -64,7 +64,7 @@ export default function AppLayout() {
         </ThemedView>
       </ThemedView>
       <Link href="/(app)/profil">
-        <IconSymbol name="settings" color={ colorScheme === "light" ? "black" : "white"} size={25}></IconSymbol>
+        <IconSymbol name="badge" color={ colorScheme === "light" ? "black" : "white"} size={25}></IconSymbol>
       </Link>
     </ThemedView>
   );

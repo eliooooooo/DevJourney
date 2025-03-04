@@ -14,7 +14,7 @@ const MAPPING = {
   'person.fill': 'person',
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
-  'badge.fill': 'badge',
+  'badge': 'badge',
   'settings': 'settings',
   'close': 'close',
   'star': 'star',

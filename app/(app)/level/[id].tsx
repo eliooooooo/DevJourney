@@ -75,7 +75,7 @@ export default function LevelPage() {
           {
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer API_KEY`,
+              'Authorization': `Bearer sk-iqs_Tz6gSDVMBjx3y6zwJJSuIpL59NzyQ38X804i-aT3BlbkFJNX9C8VDWqpcYcI4f45c7F4Te6RRKoVsZrqty48K1wA`,
             },
           }
         );
