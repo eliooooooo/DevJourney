@@ -21,7 +21,7 @@ export default function AppLayout() {
         .then(res => res.json())
         .then(
           (result) => {
-            setLevel(result);
+            setLevel(result.level);
             console.log("Stack level fetched");
           },
           (error) => {

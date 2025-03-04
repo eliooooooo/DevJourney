@@ -39,7 +39,7 @@ export default function Index() {
           <ThemedText style={{ fontSize: 16 }}>Streak {session.streak}</ThemedText>
           <ThemedText style={{ fontSize: 16 }}>Best streak {session.bestStreak}</ThemedText>
         </ThemedView>
-        <TouchableOpacity onPress={shareProgress} style={{ marginTop: 16, paddingVertical: 8, paddingHorizontal: 16, backgroundColor: '#EF5757', borderRadius: 30 }}>
+        <TouchableOpacity onPress={shareProgress} style={{ marginTop: 16, paddingVertical: 8, paddingHorizontal: 16, backgroundColor: '#5174F4', borderRadius: 30 }}>
           <ThemedText style={{ color: colorScheme === 'light' ? 'white' : 'black', fontSize: 16, textAlign: 'center' }}>
             Share progression
           </ThemedText>
