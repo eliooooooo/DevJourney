@@ -175,6 +175,10 @@ export default function LevelPage() {
         {nextLevel !== '' && nextLevel != level.id ? <Link href={`/(app)/level/${nextLevel}`} style={{ backgroundColor: '#5174F4', padding: 12, borderRadius: 30, width: '100%', display: submited === false ? 'none' : 'flex', marginTop: 16 }}>
           <ThemedText style={{ color: 'white', fontSize: 16, textAlign: 'center' }}>Next level</ThemedText>
         </Link> : null}
+        {nextLevel == level.id ? <ThemedText style={{ fontSize: 16, display: submited === false ? 'none' : 'flex' }}>You have finished the game, thank you !</ThemedText> : null}
+        {nextLevel == level.id ? <Link href="/" style={{ backgroundColor: '#5174F4', padding: 12, borderRadius: 30, width: '100%', display: submited === false ? 'none' : 'flex', marginTop: 16 }}>
+          <ThemedText style={{ color: 'white', fontSize: 16, textAlign: 'center' }}>Go back to home</ThemedText>
+        </Link> : null}
       </ThemedView>
     </ScrollView>
   );
