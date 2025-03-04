@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, Button, Image, useColorScheme } from 'react-native';
+import { View, TextInput, Button, Image, useColorScheme, TouchableOpacity } from 'react-native';
 import { Link, useRouter } from 'expo-router';
 import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/ThemedText';
@@ -44,15 +44,15 @@ const RegisterScreen = () => {
         secureTextEntry
         style={{ padding: 10, borderColor: 'gray', borderWidth: 1, color: inputText }}
       />
-      <Button
-        onPress={() => {
-          const user = { email, username, password };
-          register(user);
-        }}
-        title="Register"
-      />
+      <TouchableOpacity onPress={() => { 
+        const user = { email, username, password };
+        register(user);
+        }} 
+        style={{ backgroundColor: '#5174F4', padding: 12, borderRadius: 30, width: '100%', display: 'flex' }} >
+        <ThemedText style={{ color: 'white', fontSize: 16, textAlign: 'center' }} >Register</ThemedText>
+      </TouchableOpacity>
       <Link href="/login">
-        <ThemedText style={{ textAlign: 'center' }}>Already have an account ? <ThemedText style={{ textDecorationLine: 'underline', color: 'blue' }}>Login</ThemedText></ThemedText>
+        <ThemedText style={{ textAlign: 'center' }}>Already have an account ? <ThemedText style={{ textDecorationLine: 'underline', color: '#5174F4' }}>Login</ThemedText></ThemedText>
       </Link>
     </ThemedView>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, TextInput, Image, useColorScheme } from 'react-native';
+import { Button, TextInput, Image, useColorScheme, TouchableOpacity } from 'react-native';
 import { Link, useRouter } from 'expo-router';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -37,15 +37,15 @@ export default function SignIn() {
         secureTextEntry
         style={{ padding: 10, borderColor: 'gray', borderWidth: 1, color: inputText }}
       />
-      <Button
-        onPress={() => {
-          const user = { email, password };
-          signIn(user);
-        }}
-        title="Log In"
-      />
+      <TouchableOpacity onPress={() => { 
+        const user = { email, password };
+        signIn(user);
+        }} 
+        style={{ backgroundColor: '#5174F4', padding: 12, borderRadius: 30, width: '100%', display: 'flex' }} >
+        <ThemedText style={{ color: 'white', fontSize: 16, textAlign: 'center' }} >Log In</ThemedText>
+      </TouchableOpacity>
       <Link href="/register">
-        <ThemedText style={{ textAlign: 'center' }}>No account ? <ThemedText style={{ textDecorationLine: 'underline', color: 'blue' }}>Register</ThemedText></ThemedText>
+        <ThemedText style={{ textAlign: 'center' }}>No account ? <ThemedText style={{ textDecorationLine: 'underline', color: '#5174F4' }}>Register</ThemedText></ThemedText>
       </Link>
     </ThemedView>
   );
