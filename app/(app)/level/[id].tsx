@@ -75,7 +75,7 @@ export default function LevelPage() {
           {
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer API_KEY`,
+              'Authorization': `Bearer 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`,
             },
           }
         );
