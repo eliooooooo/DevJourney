@@ -16,3 +16,15 @@ DevJourney is designed to help users assess their knowledge across different are
 - Question Types: Supports multiple-choice, true/false, text input, and code questions.
 - MongoDB Database: Uses MongoDB for flexible and scalable data storage.
 - Mongoose Schema: Well-defined Mongoose schema for data validation and structure.
+
+## User interface
+
+<div align="center">
+  <img src="./assets/images/ui_1.jpg" alt="Login" width="250"/>
+  <img src="./assets/images/ui_2.jpg" alt="Levels" width="250"/>
+</div>
+
+<div align="center">
+  <img src="./assets/images/ui_3.jpg" alt="Level" width="250"/>
+  <img src="./assets/images/ui_4.jpg" alt="Profil" width="250"/>
+</div>
